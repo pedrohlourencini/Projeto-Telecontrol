@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </h2>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4 mb-3">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <i class="bi bi-people fs-1 mb-2"></i>
+                <h5 class="card-title">Total de Clientes</h5>
+                <p class="card-text" id="clientesCount">0</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <i class="bi bi-box fs-1 mb-2"></i>
+                <h5 class="card-title">Total de Produtos</h5>
+                <p class="card-text" id="produtosCount">0</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <i class="bi bi-clipboard-check fs-1 mb-2"></i>
+                <h5 class="card-title">Total de Ordens</h5>
+                <p class="card-text" id="ordensCount">0</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-graph-up"></i> Ordens por Status
+                </h5>
+            </div>
+            <div class="card-body">
+                <canvas id="statusChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-calendar-event"></i> Últimas Ordens
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="recentOrders">
+                    <div class="text-center text-muted">
+                        <i class="bi bi-hourglass-split fs-1"></i>
+                        <p>Carregando...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

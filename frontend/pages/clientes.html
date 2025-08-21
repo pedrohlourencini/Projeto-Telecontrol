@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>
+                <i class="bi bi-people"></i> Clientes
+            </h2>
+            <button class="btn btn-primary" onclick="openClienteModal()">
+                <i class="bi bi-plus"></i> Novo Cliente
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" class="form-control" id="clienteSearch" placeholder="Buscar clientes...">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <select class="form-select" id="clienteStatusFilter">
+            <option value="">Todos os status</option>
+            <option value="true">Ativo</option>
+            <option value="false">Inativo</option>
+        </select>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="clientesTableBody">
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">
+                            <i class="bi bi-hourglass-split fs-1"></i>
+                            <p>Carregando clientes...</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cliente -->
+<div class="modal fade" id="clienteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="clienteModalTitle">Novo Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="clienteForm">
+                    <input type="hidden" id="clienteId">
+
+                    <div class="mb-3">
+                        <label for="clienteNome" class="form-label">Nome *</label>
+                        <input type="text" class="form-control" id="clienteNome" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="clienteCpf" class="form-label">CPF *</label>
+                        <input type="text" class="form-control" id="clienteCpf" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="clienteEndereco" class="form-label">Endereço</label>
+                        <textarea class="form-control" id="clienteEndereco" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="clienteTelefone" class="form-label">Telefone</label>
+                        <input type="text" class="form-control" id="clienteTelefone">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="clienteEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="clienteEmail">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveCliente()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+# Dependências
+backend/vendor/
+node_modules/
+
+# Arquivos de configuração
+backend/config/config.php
+.env
+
+# Logs
+*.log
+logs/
+
+# Cache
+cache/
+tmp/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Backup de banco
+*.sql
+*.dump
+
+# Arquivos de upload
+uploads/
+
+# Coverage de testes
+coverage/
+*.coverage
+
+# Arquivos de build
+dist/
+build/
