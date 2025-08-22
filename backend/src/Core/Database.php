@@ -12,12 +12,15 @@ class Database
 
     private function __construct()
     {
-        $config = require __DIR__ . '/../../config/config.php';
-        $dbConfig = $config['database'];
+        $host = $_ENV['DB_HOST'] ?? 'localhost';
+        $port = $_ENV['DB_PORT'] ?? 5432;
+        $name = $_ENV['DB_NAME'] ?? 'telecontrol_db';
+        $user = $_ENV['DB_USER'] ?? 'telecontrol_user';
+        $pass = $_ENV['DB_PASS'] ?? 'telecontrol_pass';
 
         try {
-            $dsn = "pgsql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$dbConfig['name']}";
-            $this->connection = new PDO($dsn, $dbConfig['user'], $dbConfig['pass'], [
+            $dsn = "pgsql:host={$host};port={$port};dbname={$name}";
+            $this->connection = new PDO($dsn, $user, $pass, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             ]);
@@ -51,8 +54,11 @@ class Database
         return $this->query($sql, $params)->fetchAll();
     }
 
-    public function lastInsertId()
+    public function lastInsertId($sequence = null)
     {
-        return $this->connection->lastInsertId();
+        if ($sequence) {
+            return $this->connection->lastInsertId($sequence);
+        }
+        return $this->connection->query("SELECT lastval()")->fetchColumn();
     }
 }

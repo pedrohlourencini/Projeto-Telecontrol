@@ -28,10 +28,6 @@ Thumbs.db
 *.tmp
 *.temp
 
-# Backup de banco
-*.sql
-*.dump
-
 # Arquivos de upload
 uploads/
 
@@ -42,3 +38,8 @@ coverage/
 # Arquivos de build
 dist/
 build/
+
+# Backup de banco (mas permite arquivos de schema/seed)
+*.dump
+backup_*.sql
+*.backup.sql

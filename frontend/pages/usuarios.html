@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>
+                <i class="bi bi-people"></i> Gerenciamento de Usuários
+            </h2>
+            <button class="btn btn-primary" onclick="openUsuarioModal()">
+                <i class="bi bi-plus"></i> Novo Usuário
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" class="form-control" id="usuarioSearch" placeholder="Buscar usuários...">
+        </div>
+    </div>
+    <div class="col-md-3">
+        <select class="form-select" id="usuarioRoleFilter">
+            <option value="">Todos os perfis</option>
+            <option value="admin">Administrador</option>
+            <option value="usuario">Usuário</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select class="form-select" id="usuarioStatusFilter">
+            <option value="">Todos os status</option>
+            <option value="true">Ativo</option>
+            <option value="false">Inativo</option>
+        </select>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Perfil</th>
+                        <th>Status</th>
+                        <th>Data Cadastro</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="usuariosTableBody">
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">
+                            <i class="bi bi-hourglass-split fs-1"></i>
+                            <p>Carregando usuários...</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Usuário -->
+<div class="modal fade" id="usuarioModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="usuarioModalTitle">Novo Usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="usuarioForm">
+                    <input type="hidden" id="usuarioId">
+
+                    <div class="mb-3">
+                        <label for="usuarioNome" class="form-label">Nome *</label>
+                        <input type="text" class="form-control" id="usuarioNome" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="usuarioEmail" class="form-label">Email *</label>
+                        <input type="email" class="form-control" id="usuarioEmail" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="usuarioSenha" class="form-label">Senha *</label>
+                        <input type="password" class="form-control" id="usuarioSenha" required>
+                        <div class="form-text">Mínimo 6 caracteres</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="usuarioRole" class="form-label">Perfil *</label>
+                        <select class="form-select" id="usuarioRole" required>
+                            <option value="">Selecione um perfil</option>
+                            <option value="admin">Administrador</option>
+                            <option value="usuario">Usuário</option>
+                        </select>
+                        <div class="form-text">Administradores têm acesso total ao sistema</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="usuarioAtivo" class="form-label">Status</label>
+                        <select class="form-select" id="usuarioAtivo">
+                            <option value="true">Ativo</option>
+                            <option value="false">Inativo</option>
+                        </select>
+                        <div class="form-text">Usuários inativos não podem fazer login</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveUsuario()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

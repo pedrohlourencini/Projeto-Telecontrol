@@ -137,3 +137,30 @@ body {
         margin-right: 0;
     }
 }
+
+/* Estilos específicos do Dashboard */
+.dashboard-card i {
+    opacity: 0.8;
+}
+
+.recent-order-item {
+    transition: background-color 0.15s ease-in-out;
+}
+
+.recent-order-item:hover {
+    background-color: #f8f9fa;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+}
+
+#statusChart {
+    max-height: 100%;
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}

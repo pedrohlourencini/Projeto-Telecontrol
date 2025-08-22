@@ -11,12 +11,316 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
-</head>
-<body>
+        <style>
+        /* Estilo para a tela de login */
+        body.login-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Estilo para o dashboard e páginas do sistema */
+        body.dashboard-page {
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .login-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-card .card-header {
+            border-radius: 15px 15px 0 0 !important;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        .navbar {
+            background: #ffffff !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 5px 0 !important;
+            min-height: 50px !important;
+        }
+
+        .navbar .container {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+        }
+
+        .navbar-brand {
+            color: #007bff !important;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: #333 !important;
+        }
+
+        .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        /* Garantir visibilidade dos elementos de navegação */
+        #navbarNav {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        #userDropdown {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        #usuariosMenuItem {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        /* Estilos específicos para quando o usuário está logado */
+        body.dashboard-page .navbar {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        body.dashboard-page #navbarNav {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        body.dashboard-page #userDropdown {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+                /* Forçar exibição do navbar quando logado */
+        body.dashboard-page .navbar-collapse {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+            gap: 20px !important;
+        }
+
+        body.dashboard-page .navbar-nav {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            align-items: center !important;
+            margin: 0 !important;
+            gap: 5px !important;
+            justify-content: center !important;
+        }
+
+        body.dashboard-page .navbar-nav .nav-item {
+            margin: 0 2px !important;
+        }
+
+        body.dashboard-page .navbar-nav .nav-link {
+            padding: 6px 12px !important;
+            border-radius: 4px !important;
+            transition: all 0.3s ease !important;
+            white-space: nowrap !important;
+            font-size: 14px !important;
+        }
+
+        body.dashboard-page .navbar-nav .nav-link:hover {
+            background-color: rgba(0, 123, 255, 0.1) !important;
+            transform: translateY(-1px) !important;
+        }
+
+        /* Estilos para o dropdown do usuário */
+        body.dashboard-page #userDropdown {
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        body.dashboard-page #userDropdown .nav-link {
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            padding: 6px 12px !important;
+            border-radius: 4px !important;
+            background-color: rgba(0, 123, 255, 0.1) !important;
+            color: #007bff !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+        }
+
+        body.dashboard-page #userDropdown .nav-link:hover {
+            background-color: rgba(0, 123, 255, 0.2) !important;
+            color: #0056b3 !important;
+        }
+
+        /* Estilos para o dropdown menu */
+        body.dashboard-page .dropdown-menu {
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+            border-radius: 8px !important;
+            margin-top: 5px !important;
+        }
+
+        body.dashboard-page .dropdown-item {
+            padding: 8px 12px !important;
+            transition: all 0.3s ease !important;
+            font-size: 13px !important;
+        }
+
+        body.dashboard-page .dropdown-item:hover {
+            background-color: rgba(0, 123, 255, 0.1) !important;
+            color: #007bff !important;
+        }
+
+        /* Estilos para ícones nos menus */
+        body.dashboard-page .nav-link i {
+            margin-right: 4px !important;
+            font-size: 14px !important;
+        }
+
+        body.dashboard-page .dropdown-item i {
+            margin-right: 6px !important;
+            font-size: 13px !important;
+        }
+
+        /* Melhorar espaçamento do navbar brand */
+        body.dashboard-page .navbar-brand {
+            margin-right: 0 !important;
+            font-size: 1.2rem !important;
+        }
+
+        body.dashboard-page .navbar-brand i {
+            margin-right: 6px !important;
+            font-size: 1.4rem !important;
+        }
+
+        /* Estrutura centralizada da navbar */
+        body.dashboard-page .navbar-collapse {
+            position: relative !important;
+        }
+
+        /* Grupo de navegação principal */
+        body.dashboard-page .navbar-nav:first-of-type {
+            flex: 1 !important;
+            justify-content: center !important;
+            max-width: 600px !important;
+        }
+
+        /* Dropdown do usuário centralizado */
+        body.dashboard-page .navbar-nav:last-of-type {
+            position: absolute !important;
+            right: 0 !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+        }
+
+        /* Esconder elementos quando não logado */
+        body.login-page .navbar {
+            display: none !important;
+        }
+
+        body.login-page .navbar-collapse {
+            display: none !important;
+        }
+
+        body.login-page #userDropdown {
+            display: none !important;
+        }
+
+        /* Garantir que o formulário de login seja exibido corretamente */
+        body.login-page #loginForm {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-height: 100vh !important;
+            width: 100% !important;
+        }
+
+        /* Estilos específicos para o card de login */
+        body.login-page .login-card {
+            width: 100% !important;
+            max-width: 400px !important;
+            margin: 0 auto !important;
+        }
+
+        /* Ajustes para o container principal na tela de login */
+        body.login-page .container-fluid {
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+            height: 100vh !important;
+        }
+
+        /* Ajustes para o main na tela de login */
+        body.login-page main {
+            padding: 0 !important;
+            margin: 0 !important;
+            height: 100vh !important;
+        }
+
+        /* Esconder conteúdo do dashboard quando não logado */
+        body.login-page #content {
+            display: block !important;
+            min-height: 100vh !important;
+        }
+
+        /* Estilos para o conteúdo do dashboard */
+        .dashboard-content {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        /* Estilos para cards do dashboard */
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+        }
+    </style>
+  </head>
+  <body class="login-page">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#" onclick="loadPage('dashboard')">
                 <i class="bi bi-tools"></i> Telecontrol OS
             </a>
 
@@ -24,7 +328,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNav" style="display: none;">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="loadPage('dashboard')">
@@ -46,10 +350,15 @@
                             <i class="bi bi-clipboard-check"></i> Ordens de Serviço
                         </a>
                     </li>
+                    <li class="nav-item" id="usuariosMenuItem" style="display: none;">
+                        <a class="nav-link" href="#" onclick="loadPage('usuarios')">
+                            <i class="bi bi-people-fill"></i> Usuários
+                        </a>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" id="userDropdown" style="display: none;">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-person-circle"></i> <span id="userName">Usuário</span>
                         </a>
@@ -65,16 +374,16 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="container mt-4">
+    <main class="container-fluid">
         <div id="content">
             <!-- Login Form (default) -->
-            <div id="loginForm" class="row justify-content-center">
+            <div id="loginForm" class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-md-6 col-lg-4">
-                    <div class="card shadow">
-                        <div class="card-header bg-primary text-white text-center">
-                            <h4><i class="bi bi-lock"></i> Login</h4>
+                    <div class="card shadow-lg border-0 login-card">
+                        <div class="card-header bg-primary text-white text-center py-3">
+                            <h4 class="mb-0"><i class="bi bi-lock"></i> Login</h4>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-4">
                             <form id="loginFormElement">
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
@@ -84,7 +393,7 @@
                                     <label for="password" class="form-label">Senha</label>
                                     <input type="password" class="form-control" id="password" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100">
+                                <button type="submit" class="btn btn-primary w-100 py-2">
                                     <i class="bi bi-box-arrow-in-right"></i> Entrar
                                 </button>
                             </form>
@@ -117,8 +426,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="assets/js/app.js"></script>
-    <script src="assets/js/auth.js"></script>
-    <script src="assets/js/api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/app.js?v=1.4.4"></script>
 </body>
 </html>

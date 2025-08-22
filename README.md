@@ -1,65 +1,102 @@
 # Sistema de Ordem de Serviço - Telecontrol
 
-Sistema web para gerenciamento de ordens de serviço com CRUD de clientes, produtos e ordens.
+Sistema desenvolvido para gerenciar ordens de serviço da empresa Telecontrol. Permite cadastrar clientes, produtos e controlar todo o fluxo de ordens de serviço com interface web responsiva e API REST.
 
 ## Tecnologias
-- **Backend**: PHP 8.1+ (Orientado a Objetos)
-- **Frontend**: HTML, JavaScript, jQuery, Bootstrap 5
-- **Banco**: PostgreSQL
-- **Autenticação**: JWT
 
-## Instalação Rápida
+### Backend
+- PHP 8.1+ (orientação a objetos)
+- PostgreSQL 15
+- JWT para autenticação
+- Apache
+- Composer
 
-### 1. Clone e configure
+### Frontend
+- HTML5, CSS3, JavaScript
+- jQuery
+- Bootstrap 5
+- Nginx
+
+### Infraestrutura
+- Docker e Docker Compose
+- Shell Script para instalação
+
+## Pré-requisitos
+
+- Docker e Docker Compose
+- Portas 3000, 8000 e 5432 livres
+
+## Instalação
+
+### Instalação Automática
+
 ```bash
 git clone <url-do-repositorio>
 cd Projeto-Telecontrol
-copy env.example .env
+chmod +x install.sh
+./install.sh
 ```
 
-### 2. Execute com Docker
+### Instalação Manual
+
 ```bash
-docker-compose up -d
+git clone <url-do-repositorio>
+cd Projeto-Telecontrol
+docker compose up -d
 ```
 
-### 3. Acesse
-- **Frontend**: http://localhost:3000
-- **Login**: admin@telecontrol.com / password
+Aguarde alguns minutos para a inicialização completa.
+
+## Acesso
+
+Após a instalação, acesse:
+
+- Frontend: http://localhost:3000
+- API: http://localhost:8000/api
+- Banco: localhost:5432
+
+**Login padrão:**
+- Email: admin@telecontrol.com
+- Senha: admin123
 
 ## Funcionalidades
 
-### ✅ Clientes
+### Clientes
 - CRUD completo
-- Validação de CPF
-- Busca e filtros
+- Validação de CPF/CNPJ
+- Busca simples
 
-### ✅ Produtos
+### Produtos
 - CRUD completo
-- Controle de status e garantia
-- Busca avançada
+- Controle de status
+- Busca básica
 
-### ✅ Ordens de Serviço
+### Ordens de Serviço
 - CRUD completo
-- Cadastro automático de clientes
-- Sistema de logs
-- Validações integradas
+- Relacionamento com clientes e produtos
+- Sistema de status
 
-### ✅ Segurança
+### Segurança
 - Autenticação JWT
-- Validação de CPF
+- Validação básica de dados
 - Proteção contra SQL Injection
-- Controle de acesso por roles
 
-## API Endpoints
+## API
 
 ```
 POST /api/auth/login          # Login
 GET  /api/clientes           # Listar clientes
 POST /api/clientes           # Criar cliente
+PUT  /api/clientes/{id}      # Atualizar cliente
+DELETE /api/clientes/{id}    # Remover cliente
 GET  /api/produtos           # Listar produtos
 POST /api/produtos           # Criar produto
+PUT  /api/produtos/{id}      # Atualizar produto
+DELETE /api/produtos/{id}    # Remover produto
 GET  /api/ordens             # Listar ordens
 POST /api/ordens             # Criar ordem
+PUT  /api/ordens/{id}        # Atualizar ordem
+DELETE /api/ordens/{id}      # Remover ordem
 ```
 
 ## Estrutura Simplificada
@@ -68,22 +105,76 @@ POST /api/ordens             # Criar ordem
 backend/
 ├── src/
 │   ├── Core/           # Database, Router
-│   ├── Models/         # Cliente, Produto, Ordem
-│   ├── Controllers/    # Auth, CRUD
-│   └── Middleware/     # Auth, CORS
+│   ├── Models/         # Cliente, Produto, Ordem, Usuario
+│   └── Controllers/    # Auth, CRUD
+├── api/routes/         # Definição das rotas
 ├── database/           # Schema e dados
-└── public/            # Ponto de entrada
+├── public/            # Ponto de entrada
 
 frontend/
 ├── assets/            # CSS, JS
 ├── pages/             # HTML das páginas
-└── index.html         # Página principal
+├── index.html         # Página principal
 ```
 
 ## Comandos Úteis
 
 ```bash
-docker-compose up -d    # Iniciar
-docker-compose down     # Parar
-docker-compose logs     # Ver logs
+# Iniciar sistema
+docker compose up -d
+
+# Parar sistema
+docker compose down
+
+# Ver logs
+docker compose logs
+docker compose logs php
+docker compose logs postgres
+
+# Acessar container PHP
+docker exec -it telecontrol-php-1 bash
+
+# Acessar banco PostgreSQL
+docker exec -it telecontrol-postgres-1 psql -U telecontrol_user -d telecontrol_db
 ```
+
+## Configuração
+
+### Variáveis de Ambiente
+```env
+DB_HOST=postgres
+DB_NAME=telecontrol_db
+DB_USER=telecontrol_user
+DB_PASS=telecontrol_pass
+JWT_SECRET=your-secret-key
+```
+
+Para alterar a chave JWT, modifique `JWT_SECRET` no `docker-compose.yml` e reinicie.
+
+## Problemas Comuns
+
+### Containers não iniciam
+```bash
+# Verificar portas
+netstat -tulpn | grep :3000
+netstat -tulpn | grep :8000
+netstat -tulpn | grep :5432
+```
+
+### Erro de conexão com banco
+```bash
+# Verificar logs
+docker compose logs postgres
+docker compose restart postgres
+```
+
+### Erro de permissão
+```bash
+chmod +x install.sh
+chmod -R 755 backend/
+chmod -R 755 frontend/
+```
+
+### Cache do navegador
+- Ctrl+F5 para recarregar
+- Ou limpar cache

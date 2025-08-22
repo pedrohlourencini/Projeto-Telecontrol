@@ -23,14 +23,26 @@ class AuthController
             return;
         }
 
+        // Log para debug
+        error_log("Tentativa de login para email: " . $data['email']);
+
         $user = $this->usuarioModel->verifyPassword($data['email'], $data['password']);
+
+        // Log para debug
+        if ($user) {
+            error_log("Usuário encontrado: " . $user['nome'] . " - Role: " . $user['role'] . " - Ativo: " . $user['ativo']);
+        } else {
+            error_log("Usuário não encontrado ou senha incorreta para: " . $data['email']);
+        }
 
         if (!$user) {
             $this->sendResponse(['error' => 'Email ou senha inválidos'], 401);
             return;
         }
 
+        // Verificar se o usuário está ativo
         if (!$user['ativo']) {
+            error_log("Usuário inativo: " . $user['nome'] . " - Ativo: " . $user['ativo']);
             $this->sendResponse(['error' => 'Usuário inativo'], 401);
             return;
         }
@@ -71,9 +83,37 @@ class AuthController
 
     public function logout()
     {
-        // Em uma implementação real, você poderia invalidar o token
-        // Por simplicidade, apenas retornamos sucesso
         $this->sendResponse(['message' => 'Logout realizado com sucesso']);
+    }
+
+    public function changePassword()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $user = $GLOBALS['currentUser'];
+
+        // Validação dos dados
+        if (!isset($data['currentPassword']) || !isset($data['newPassword'])) {
+            $this->sendResponse(['error' => 'Senha atual e nova senha são obrigatórias'], 400);
+            return;
+        }
+
+        if (strlen($data['newPassword']) < 6) {
+            $this->sendResponse(['error' => 'A nova senha deve ter pelo menos 6 caracteres'], 400);
+            return;
+        }
+
+        // Tentar alterar a senha
+        $result = $this->usuarioModel->changePassword(
+            $user->id,
+            $data['currentPassword'],
+            $data['newPassword']
+        );
+
+        if ($result['success']) {
+            $this->sendResponse(['message' => $result['message']]);
+        } else {
+            $this->sendResponse(['error' => $result['message']], 400);
+        }
     }
 
     private function sendResponse($data, $statusCode = 200)

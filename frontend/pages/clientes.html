@@ -35,7 +35,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>CPF</th>
+                        <th>CPF/CNPJ</th>
                         <th>Telefone</th>
                         <th>Email</th>
                         <th>Status</th>
@@ -73,8 +73,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="clienteCpf" class="form-label">CPF *</label>
-                        <input type="text" class="form-control" id="clienteCpf" required>
+                        <label for="clienteCpfCnpj" class="form-label">CPF/CNPJ *</label>
+                        <input type="text" class="form-control" id="clienteCpfCnpj" required>
                     </div>
 
                     <div class="mb-3">
@@ -90,6 +90,15 @@
                     <div class="mb-3">
                         <label for="clienteEmail" class="form-label">Email</label>
                         <input type="email" class="form-control" id="clienteEmail">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="clienteStatus" class="form-label">Status</label>
+                        <select class="form-select" id="clienteStatus">
+                            <option value="true">Ativo</option>
+                            <option value="false">Inativo</option>
+                        </select>
+                        <div class="form-text">Defina se o cliente está ativo ou inativo no sistema</div>
                     </div>
                 </form>
             </div>
